@@ -1,4 +1,4 @@
-const errorHandler = require("../utils/errorHandler");
+const errorHandler = require("../middleware/errorHandler");
 
 const getAllEmployee = async (req, res) => {
   res.status(200).json({ msg: `All Employees` });

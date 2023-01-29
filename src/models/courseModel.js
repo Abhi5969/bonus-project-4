@@ -1,22 +1,25 @@
-const mongoose= require("mongoose")
+const mongoose = require("mongoose");
 
-const courseSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true,
-        trim:true
+const courseSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    description:{
-        type:String,
-        required:true
+    description: {
+      type: String,
+      required: true,
     },
-    videoUrl:{
-        type:String,
+    videoUrl: {
+      type: String,
+      required: true,
+    },
+    topics: [{ type: String }],
+    duration: { type: String },
+    category: { type: String },
+  },
+  { timestamps: true, validateBeforeSave: true }
+);
 
-    },
-    topics:[{type:String,}],
-    duration:{type:String,},
-    category:{type:String}
-},{timestamps:true,validateBeforeSave:true})
-
-module.exports=mongoose.model('Course',courseSchema)
+module.exports = mongoose.model("Course", courseSchema);
