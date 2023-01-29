@@ -11,8 +11,7 @@ const empolyeeSchema = new mongoose.Schema({
     email:{
         type:String,
         trim:true,
-        required:true,
-        validator:validator.isEmail()
+        required:true
     },
     password:{
         type:String,
