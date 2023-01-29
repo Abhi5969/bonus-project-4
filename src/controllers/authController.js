@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const employeeModel = require('../models/employeeModel')
-const errorHandler = require("../utils/errorHandler");
+const errorHandler = require("../middleware/errorHandler");
 const login = async (req, res) => {
     let data = req.body
     let { email, password } = data
