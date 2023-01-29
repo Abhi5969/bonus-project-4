@@ -1,5 +1,5 @@
-const errorHandler = require("../middleware/errorHandler");
-
+const errorHandler = require("../utils/errorHandler");
+const employeeModel = require('../models/employeeModel')
 const getAllEmployee = async (req, res) => {
   res.status(200).json({ msg: `All Employees` });
 };
