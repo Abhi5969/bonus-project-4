@@ -13,7 +13,9 @@ app.use(express.json());
 app.use("/", route);
 app.use("/api/v1/courses", coursesRouter);
 app.use("/api/v1/employees", employeesRouter);
-
+app.use("/*",(req,res)=>{
+  res.status(404).send({msg:`invalid request`})
+})
 mongoose
   .connect(process.env.MONGO_DB)
   .then(() => console.log("Mongodb is connected."))
