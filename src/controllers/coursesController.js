@@ -19,8 +19,8 @@ const createCourse = async (req, res) => {
   if(!topics) res.status(400).send({message:`topics is require !`})
   if(!duration) res.status(400).send({message:`duration is require !`})
   if(!category) res.status(400).send({message:`category is require !`})
-  const caeateCourse= await courseModel.create(data)
-  res.status(200).json({ msg: `Create course`,data:caeateCourse });
+  const createCourse= await courseModel.create(data)
+  res.status(200).json({ msg: `Create course`,data:createCourse });
 };
 const updateCourse = async (req, res) => {
   const id=req.params.id;
