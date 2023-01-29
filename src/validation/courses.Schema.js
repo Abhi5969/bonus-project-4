@@ -1,12 +1,12 @@
-const { z } = require("zod");
+const yup = require("yup");
 
-const validationSchema = z.object({
-  title: z.string().trim(),
-  description: z.string(),
-  videoUrl: z.string(),
-  topics: z.array(z.string()),
-  duration: z.string(),
-  category: z.string(),
+const validationSchema = yup.object({
+  title: yup.string().required("Title is required").trim(),
+  description: yup.string().required("Description is required"),
+  videoUrl: yup.string().required("VideoUrl is required"),
+  topics: yup.array(yup.string()),
+  duration: yup.string().required("Please specify duration"),
+  category: yup.string().required("Please add category"),
 });
 
 module.exports = validationSchema;

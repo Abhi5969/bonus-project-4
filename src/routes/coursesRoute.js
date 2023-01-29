@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const validationSchema = require("../validation/courses.Schema");
-const validate = require("../middleware/validate");
+const validateWith = require("../middleware/validateWith");
 
 const {
   createCourse,
@@ -14,7 +14,7 @@ const {
 router
   .route("/")
   .get(getAllCourse)
-  .post(validate(validationSchema), createCourse);
+  .post(validateWith(validationSchema), createCourse);
 router
   .route("/:id")
   .get(getSingleCourse)
