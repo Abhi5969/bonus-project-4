@@ -1,19 +1,24 @@
-const jwt = require("jsonwebtoken")
-const employeeModel = require('../models/employeeModel')
+const jwt = require("jsonwebtoken");
+const errorHandler = require("../middleware/errorHandler");
 
-const authentication = async (req,res) =>{
-    let token = req.headers["x-auth-key"];
-    if(!token) res.status(400).send({msg:`token is not present`})
+const authentication = async (req, res, next) => {
+  let token = req.headers["x-auth-key"];
+  if (!token) res.status(400).send({ msg: `authentication failure` });
 
-    jwt.verify(token, "bonusproject4", (err,decode) => {
-        if (err) {return res.status(401).send({status: false, err: err.message })
-      }else{
-          req.decode = decode;
-          return next(); 
-      };
-      });
-}
+  const employee = jwt.verify(token, process.env.JWT_SECRET);
+  req.user = employee;
+  return next();
+};
 
-const authorization = async (req,res)=>{
-    
-}
+const hasPermission = (...roles) =>
+  errorHandler(async (req, res, next) => {
+    if (roles.includes(req.user.role)) {
+      return next();
+    }
+    res.status(403).json({ msg: `Permission Denied` });
+  });
+
+module.exports = {
+  authentication: errorHandler(authentication),
+  hasPermission,
+};

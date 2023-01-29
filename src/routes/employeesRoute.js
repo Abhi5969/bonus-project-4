@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const validationSchema = require("../validation/employee.Schema");
 const validateWith = require("../middleware/validateWith");
+const {
+  createEmployeeValidationSchema,
+  updateEmployeeValidationSchema,
+} = require("../validation/employee.Schema");
 
 const {
   createEmployee,
@@ -14,11 +17,11 @@ const {
 router
   .route("/")
   .get(getAllEmployee)
-  .post(validateWith(validationSchema), createEmployee);
+  .post(validateWith(createEmployeeValidationSchema), createEmployee);
 router
   .route("/:id")
   .get(getSingleEmployee)
-  .patch(updateEmployee)
+  .patch(validateWith(updateEmployeeValidationSchema), updateEmployee)
   .delete(deleteEmployee);
 
 module.exports = router;

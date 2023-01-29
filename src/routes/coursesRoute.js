@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const validationSchema = require("../validation/courses.Schema");
+const {
+  createCourseValidationSchema,
+  updateCourseValidationSchema,
+} = require("../validation/courses.Schema");
 const validateWith = require("../middleware/validateWith");
+const { authentication, hasPermission } = require("../middleware/authMW");
 
 const {
   createCourse,
@@ -14,11 +18,21 @@ const {
 router
   .route("/")
   .get(getAllCourse)
-  .post(validateWith(validationSchema), createCourse);
+  .post(
+    validateWith(createCourseValidationSchema),
+    authentication,
+    hasPermission("Admin", "Super Admin"),
+    createCourse
+  );
 router
   .route("/:id")
   .get(getSingleCourse)
-  .patch(updateCourse)
+  .patch(
+    validateWith(updateCourseValidationSchema),
+    authentication,
+    hasPermission("Admin", "Super Admin"),
+    updateCourse
+  )
   .delete(deleteCourse);
 
 module.exports = router;
