@@ -7,7 +7,7 @@ const {
   getAllCourse,
   getSingleCourse,
   updateCourse,
-} = require("../controllers/courses");
+} = require("../controllers/coursesController");
 
 router.route("/").get(getAllCourse).post(createCourse);
 router

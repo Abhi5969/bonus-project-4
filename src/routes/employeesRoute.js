@@ -7,7 +7,7 @@ const {
   getAllEmployee,
   getSingleEmployee,
   updateEmployee,
-} = require("../controllers/employees");
+} = require("../controllers/employeesController");
 
 router.route("/").get(getAllEmployee).post(createEmployee);
 router

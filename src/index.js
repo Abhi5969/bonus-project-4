@@ -4,8 +4,8 @@ const app = express();
 const route = require("./routes/route");
 const mongoose = require("mongoose");
 
-const coursesRouter = require("./routes/courses");
-const employeesRouter = require("./routes/employees");
+const coursesRouter = require("./routes/coursesRoute");
+const employeesRouter = require("./routes/employeesRoute");
 
 mongoose.set("strictQuery", true);
 
